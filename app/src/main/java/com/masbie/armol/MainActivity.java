@@ -111,7 +111,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 statusMessage.setText(String.format(getString(R.string.ocr_error),
                         CommonStatusCodes.getStatusCodeString(resultCode)));
             }
-         
+
         }
         else {
             super.onActivityResult(requestCode, resultCode, data);
