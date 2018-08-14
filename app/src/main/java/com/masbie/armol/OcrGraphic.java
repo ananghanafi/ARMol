@@ -15,10 +15,15 @@
  */
 package com.masbie.armol;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.opengl.GLSurfaceView;
 
 import com.masbie.armol.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.text.Text;
@@ -39,6 +44,10 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
     private static Paint sRectPaint;
     private static Paint sTextPaint;
     private final TextBlock mText;
+
+    GLSurfaceView mView;
+    MyRenderer rend;
+    Paint p;
 
     OcrGraphic(GraphicOverlay overlay, TextBlock text) {
         super(overlay);
@@ -116,7 +125,19 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
         for(Text currentText : textComponents) {
             float left = translateX(currentText.getBoundingBox().left);
             float bottom = translateY(currentText.getBoundingBox().bottom);
-            canvas.drawText(currentText.getValue(), left, bottom, sTextPaint);
+              canvas.drawText(currentText.getValue(), left, bottom, sTextPaint);
+            System.out.println("cobastst "+ currentText.getValue());
+            if (currentText.getValue().equals("NA")){
+                System.out.println("vit");
+                Paint pBackground = new Paint();
+                pBackground.setColor(Color.WHITE);
+                canvas.drawRect(0, 0, 512, 512, pBackground);
+                Paint pText = new Paint();
+                pText.setColor(Color.BLACK);
+                pText.setTextSize(20);
+                canvas.drawText("Sample Text", 100, 100, pText);
+
+            }
         }
     }
 }

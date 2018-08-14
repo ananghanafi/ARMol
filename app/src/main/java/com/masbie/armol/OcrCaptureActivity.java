@@ -329,6 +329,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 Intent data = new Intent();
                 data.putExtra(TextBlockObject, text.getValue());
                 setResult(CommonStatusCodes.SUCCESS, data);
+                System.out.println("cobaOcr");
                 finish();
             }
             else {
